@@ -33,28 +33,49 @@
     </div>
 
     <ul class="main_menu">
-        <li><a href="{{ url_for('main.home') }}"><p>Главная</p></a></li>
-        <li><a href="{{ url_for('main.blog') }}"><p>Блог</p></a></li>
-        <li><a href="{{ url_for('users.register')}}"><p>Регистрация</p></a></li>
-        <li><a href="{{ url_for('users.login') }}"><p>Логин</p></a></li>
-        <li><a href="#"><p>Аккаунт</p></a></li>
-        <li><a href="#"><p>Создать</p></a></li>
-        <li><a href="#"><p>Выход</p></a></li>
+        {% if current_user.is_authenticated %}
+            <li><a href="{{ url_for('main.home') }}">Главная</a></li>
+            <li><a href="{{ url_for('main.blog') }}">Блог</a></li>
+            <li><a href="{{ url_for('users.account') }}">Аккаунт</a></li>
+            <li><a href="#">Создать</a></li>
+            <li><a href="{{ url_for('users.logout') }}">Выход</a></li>
+
+
+        {% else %}
+                    <li><a href="{{ url_for('main.home') }}">Главная</a></li>
+                    <li><a href="{{ url_for('users.login') }}">Войти</a></li>
+                    <li><a href="{{ url_for('users.register') }}">Регистрация</a></li>
+
+
+
+        {% endif %}
     </ul>
 
 </header>
 {% endblock menu %}
 
 <div class="content">
-{% block content %}
+        <main role="main" class="#">
+            <div class="row">
+            <div class="col-md-12">
+            {% with messages = get_flashed_messages(with_categories=True) %}
 
+            {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
 
+            {% endwith %}
 
-      <div class="empty_block"></div>
+            {% block content %}{% endblock content %}
+        </div>
+        </div>
 
-
-{% endblock content %}
-</div>
+        </main>
+    </div>
 
 
 {% block main_page %}

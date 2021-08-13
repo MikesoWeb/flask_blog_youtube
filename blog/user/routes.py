@@ -1,6 +1,10 @@
 import os
 import shutil
-from flask import Blueprint, render_template, flash, url_for
+from datetime import datetime
+
+import pytz
+from flask import Blueprint, render_template, flash, url_for, request, g
+from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.utils import redirect
 
 from blog import bcrypt, db
@@ -10,8 +14,18 @@ from blog.user.forms import RegistrationForm, LoginForm
 users = Blueprint('users', __name__)
 
 
+# @users.before_request
+# def before_request():
+#     g.user = current_user
+#     if g.user.is_authenticated:
+#         g.user.last_seen = datetime.utcnow()
+#         db.session.commit()
+
+
 @users.route('/register', methods=['GET', 'POST'])
 def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('main.blog'))
     form = RegistrationForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
@@ -30,6 +44,30 @@ def register():
 
 @users.route('/login', methods=['GET', 'POST'])
 def login():
-    users = User.query.all()
-    return render_template('login.html', title='Авторизация', legend='Авторизация', users=users)
+    if current_user.is_authenticated:
+        return redirect(url_for('main.blog'))
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            login_user(user, remember=form.remember.data)
+            next_page = request.args.get('next')
+            return redirect(next_page) if next_page else redirect(url_for('users.account'))
+        else:
+            flash('Войти не удалось. Пожалуйста, проверьте электронную почту или пароль', 'danger')
+    return render_template('login.html', form=form, title='Логин', legend='Войти')
 
+
+@users.route('/account', methods=['GET', 'POST'])
+@login_required
+def account():
+    return render_template('account.html')
+
+
+@users.route('/logout')
+@login_required
+def logout():
+    current_user.last_seen = datetime.now()
+    db.session.commit()
+    logout_user()
+    return redirect(url_for('main.home'))

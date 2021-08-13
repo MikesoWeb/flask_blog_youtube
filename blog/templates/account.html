@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+
+
+{% block content %}
+    <div class="empty_block"></div>
+
+    <p> Hello {{ current_user.username }}</p>
+    <p>Последний раз вы входили: {{ current_user.last_seen.strftime('%d-%m-%Y %H:%M:%S:%f') }}</p>
+
+
+{% endblock content %}
+
+
