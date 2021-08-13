@@ -1,17 +1,17 @@
 from flask import Blueprint, render_template
 
+
 main = Blueprint('main', __name__)
 
 
 @main.route('/')
 def home():
-
     return render_template('index.html', title='Главная')
 
 
 @main.route('/blog')
 def blog():
-    return render_template('index.html', title='Блог')
+    return render_template('blog.html', title='Блог')
 
 
 @main.route('/html_page')

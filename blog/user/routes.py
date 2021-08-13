@@ -30,4 +30,6 @@ def register():
 
 @users.route('/login', methods=['GET', 'POST'])
 def login():
-    return 'hello'
+    users = User.query.all()
+    return render_template('login.html', title='Авторизация', legend='Авторизация', users=users)
+

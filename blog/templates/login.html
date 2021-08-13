@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+{% for user in users: %}
+
+<ul>
+    <li>{{ user.id }} - {{ user.username }} - {{ user.email }} - {{ user.password }} - {{ user.image_file }} </li>
+
+</ul>
+
+{% endfor %}
+
+{% endblock %}
