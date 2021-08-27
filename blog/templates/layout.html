@@ -33,48 +33,26 @@
     </div>
 
     <ul class="main_menu">
-        {% if current_user.is_authenticated %}
+
             <li><a href="{{ url_for('main.home') }}">Главная</a></li>
+            <li><a href="{{ url_for('users.register') }}">Регистрация</a></li>
+            <li><a href="{{ url_for('users.login') }}">Войти</a></li>
             <li><a href="{{ url_for('main.blog') }}">Блог</a></li>
             <li><a href="{{ url_for('users.account') }}">Аккаунт</a></li>
             <li><a href="#">Создать</a></li>
             <li><a href="{{ url_for('users.logout') }}">Выход</a></li>
 
-
-        {% else %}
-                    <li><a href="{{ url_for('main.home') }}">Главная</a></li>
-                    <li><a href="{{ url_for('users.login') }}">Войти</a></li>
-                    <li><a href="{{ url_for('users.register') }}">Регистрация</a></li>
-
-
-
-        {% endif %}
     </ul>
 
 </header>
 {% endblock menu %}
 
-<div class="content">
-        <main role="main" class="#">
-            <div class="row">
-            <div class="col-md-12">
-            {% with messages = get_flashed_messages(with_categories=True) %}
 
-            {% if messages %}
-            {% for category, message in messages %}
-            <div class="alert alert-{{ category }}">
-                {{ message }}
-            </div>
-            {% endfor %}
-            {% endif %}
+    <div class="content">
 
-            {% endwith %}
+            {% block content %}
+            {% endblock content %}
 
-            {% block content %}{% endblock content %}
-        </div>
-        </div>
-
-        </main>
     </div>
 
 
@@ -91,6 +69,7 @@
 
     <footer class="footer">Все права защищены!<br>
         &#169; Терехов Михаил 2021
+
     </footer>
 
 {% endblock footer %}

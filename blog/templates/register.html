@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<div class="login_form">
+<div class="register_form">
     <form action="" method="POST">
 
         {{ form.hidden_tag() }}
@@ -53,19 +53,22 @@
         {% endif %}
 
 
-        <div class="form-group">
-            {{ form.submit(class='btn_sign_in') }}
+        <div class="form-group_button">
+           <div class="btn">
+                {{ form.submit(class='btn_sign_in') }}
+           </div>
+              <small class="text-muted">
+            Уже есть аккаунт? <a class='ml-2' href="{{ url_for('users.login')}}">Войти</a>
+        </small>
         </div>
 
     </form>
     <div class="border-top">
-        <small class="text-muted">
-            Уже есть аккаунт? <a class='ml-2' href="{{ url_for('users.login')}}">Войти</a>
-        </small>
+
     </div>
 </div>
 
 
 </div>
 
-{% endblock %}
+{% endblock content%}
