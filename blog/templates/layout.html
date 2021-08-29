@@ -11,11 +11,8 @@
 
   {% block title %}
 
-      {% if title %}
-        <title>Flask - {{ title }}</title>
-      {% else %}
-        <title>Flask Blog</title>
-      {% endif %}
+    <title>{{ title if title else 'Flask-blog' }}</title>
+
 
   {% endblock title %}
 
@@ -33,14 +30,21 @@
     </div>
 
     <ul class="main_menu">
+{% if current_user.is_authenticated %}
+        <li><a href="{{ url_for('main.home') }}">Главная</a></li>
+        <li><a href="{{ url_for('post.new_post') }}">Создать</a></li>
+        <li><a href="{{ url_for('main.blog') }}">Блог</a></li>
+        <li><a href="{{ url_for('user.account') }}">Аккаунт</a></li>
+        <li><a href="{{ url_for('user.logout') }}">Выход</a></li>
 
-            <li><a href="{{ url_for('main.home') }}">Главная</a></li>
-            <li><a href="{{ url_for('users.register') }}">Регистрация</a></li>
-            <li><a href="{{ url_for('users.login') }}">Войти</a></li>
-            <li><a href="{{ url_for('main.blog') }}">Блог</a></li>
-            <li><a href="{{ url_for('users.account') }}">Аккаунт</a></li>
-            <li><a href="#">Создать</a></li>
-            <li><a href="{{ url_for('users.logout') }}">Выход</a></li>
+
+        {% else %}
+        <li><a href="{{ url_for('main.home') }}">Главная</a></li>
+        <li><a href="{{ url_for('user.register') }}">Регистрация</a></li>
+        <li><a href="{{ url_for('user.login') }}">Логин</a></li>
+
+
+        {% endif %}
 
     </ul>
 
@@ -49,9 +53,30 @@
 
 
     <div class="content">
+        <div class="empty_block"></div>
+        <div class="empty_block"></div>
+<main role="main" class="#">
+            <div class="row">
+            <div class="col-md-12">
+            {% with messages = get_flashed_messages(with_categories=True) %}
+
+            {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+
+            {% endwith %}
 
             {% block content %}
-            {% endblock content %}
+                        <div class="empty_block"></div>
+                {% endblock content %}
+        </div>
+        </div>
+
+        </main>
 
     </div>
 
