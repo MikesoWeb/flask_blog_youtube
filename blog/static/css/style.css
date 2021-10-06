@@ -15,6 +15,7 @@ body,
 }
 
 
+
 /* Пустой блок, используется временно */
 .empty_block{
     height:50px;
@@ -148,7 +149,7 @@ ul .checkmark:before {
 
 /* BLOCK_CONTENT */
 .content{
-    width: 50%;
+    width: 80%;
     margin: 0 auto;
     flex: 1 0 auto;
 
@@ -163,13 +164,18 @@ ul .checkmark:before {
 
 /* LOGIN_FORM */
 .register_form{
+    width: 50%;
     height: 200px;
     margin: 0 auto;
-    margin: 100px 0;
     align-items: center;
     text-align: center;
 }
 
+.login_form{
+    width: 50%;
+    align-items: center;
+    margin: 0 auto;
+}
 
 .legend {
     font-size: 25px;
@@ -228,6 +234,8 @@ border-radius: 10px;
 
 }
 
+
+
 .btn_sign_in{
     width: 120px;
     height: 30px;
@@ -259,3 +267,39 @@ border-radius: 10px;
     margin-right: 10px;
 }
 
+
+.content-section{
+    display: flex;
+    weight: 100%;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+
+.update_info{
+text-align: center;
+width: 300px;
+
+}
+
+.font_info{
+font-size: 20px;
+color: blue;
+}
+
+.font_update{
+color: orange;
+font-size: 20px;
+
+}
+
+.card{
+text-align: center;
+align-items: center;
+width: 300px;
+border :none;
+}
+
+.account-img{
+width:200px;
+border-radius: 50px;
+}
