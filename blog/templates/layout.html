@@ -54,10 +54,9 @@
 
     <div class="content">
 
-        <div class="empty_block"></div>
 <main role="main" class="#">
             <div class="row">
-            <div class="col-md-12">
+            <div class="#">
             {% with messages = get_flashed_messages(with_categories=True) %}
 
             {% if messages %}
@@ -70,9 +69,12 @@
 
             {% endwith %}
 
+
+
             {% block content %}
-                        <div class="empty_block"></div>
              {% endblock content %}
+
+
         </div>
         </div>
 

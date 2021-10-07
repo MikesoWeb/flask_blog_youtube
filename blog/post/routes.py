@@ -31,7 +31,7 @@ def new_post():
 @posts.route('/post/<int:post_id>')
 @login_required
 def post(post_id):
-    post = Post.query.get_or_404(post_id)
+    post = Post.query. get_or_404(post_id)
     image_file = url_for('static',
                          filename=f'profile_pics/' + post.author.username + '/post_images/' + post.image_post)
     return render_template('post.html', title=post.title, post=post, image_file=image_file)

@@ -2,12 +2,8 @@
 
 
 {% block content %}
-    <div class="empty_block"></div>
-
-
 
 <div class="content-section">
-
 
     <div class="left_side">
     <h5>Зарегистрированные: </h5>
@@ -31,7 +27,7 @@
                     </ul>
 
 </div>
-<div class="list_posts">
+<div class="list_posts" style="font-size: 18px;">
      <h5>Список статей: {{ user.posts.total }} </h5>
 
 {#                    <ul>
@@ -51,7 +47,6 @@
 </div>
 <div class="right_side">
 <div class="card">
-                        <legend class="border-bottom mb-6 font_info">Информация об аккаунте</legend>
 
         <img class="card-body account-img " src="{{ image_file }}">
         <div class="media-body">
@@ -127,7 +122,6 @@
 <!--        {{ user_all  }}-->
 
 </div>
-    <div class="empty_block"></div>
 
 {% endblock content %}
 

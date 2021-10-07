@@ -1,7 +1,9 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<center>
+
+<div class="wrapper_content">
+
     <div class="post">
         <img src="{{ url_for('static', filename='profile_pics/' + post.author.username + '/' + 'account_img' + '/' + post.author.image_file) }}"
              alt="" class="mr-3 mt-3 rounded-circle" style="width:40px;">
@@ -14,10 +16,11 @@
         <h2 class="article-title"> {{ post.title }}</h2>
         <p class="article-content">{{ post.content }}</p>
         <img src="{{ image_file }}" alt="post_img"><br><br>
-        <a href="{{ url_for( 'main.blog' ) }}">Вернуться к постам</a>
+        <br>
+        <a href="{{ url_for( 'main.blog' ) }}">Вернуться к блогу</a>
 
-</center>
-<br>
 
+</div>
+</div>
 
 {% endblock %}
