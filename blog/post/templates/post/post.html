@@ -1,25 +1,32 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<center>
+
 <div class="post">
-<img src="{{ url_for('static', filename='profile_pics/' + post.author.username + '/' + post.author.image_file) }}"
+    <div class="user_post">
+        <div class="user_info_single_post">
+            <div class="left_side">
+<img src="{{ url_for('static', filename='profile_pics/' + post.author.username + '/account_img/' + post.author.image_file) }}"
      alt="" class="mr-3 mt-3 rounded-circle" style="width:40px;">
 
 <a class="mr-2" href="{{ url_for('user.user_posts', username=post.author.username)}}">{{ post.author.username }}</a>
 <small class="text-muted">{{ post.date_posted.strftime('%d.%m.%Y-%H.%M') }}</small>
-{% if post.author == current_user %}|
-
+{% if post.author == current_user %}
+</div>
+            <div class="right_side">
 <a class="btn btn-secondary btn-sm m-2" href="{{ url_for('post.update_post', post_id=post.id) }}">Обновить</a>
 <button type="button" class="btn btn-danger btn-sm m-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
     Удалить
 </button>
 
 {% endif %}
-<h2 class="article-title"> {{ post.title }}</h2>
-<p class="article-content">{{ post.content }}</p>
+                </div>
+            </div>
+
+<h2 class="article-title" align="left"> {{ post.title }}</h2>
+            <p class="article-content" align="left" >{{ post.content}}</p>
 <img src="{{ image_file }}" alt="post_img">
-</center>
+
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
      aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -41,7 +48,6 @@
             </div>
         </div>
     </div>
-</div>
 </div>
 
 

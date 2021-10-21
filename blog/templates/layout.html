@@ -3,6 +3,7 @@
 <head>
 
   <meta charset="UTF-8">
+    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='icon/favicon.ico') }}">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
             <link rel="stylesheet" href="{{ url_for('static', filename='css/media_css.css')}}">
@@ -12,7 +13,6 @@
   {% block title %}
 
     <title>{{ title if title else 'Flask-blog' }}</title>
-
 
   {% endblock title %}
 
@@ -27,15 +27,22 @@
 
     <div class="logo">
         <img src="{{ url_for('static', filename='img/logo.png') }}" alt="logo">
+
     </div>
 
     <ul class="main_menu">
 {% if current_user.is_authenticated %}
+
+
         <li><a href="{{ url_for('main.home') }}">Главная</a></li>
-        <li><a href="{{ url_for('post.new_post') }}">Создать</a></li>
         <li><a href="{{ url_for('main.blog') }}">Блог</a></li>
         <li><a href="{{ url_for('user.account') }}">Аккаунт</a></li>
         <li><a href="{{ url_for('user.logout') }}">Выход</a></li>
+
+        <div class="online_status">
+            <div class="online_user"></div>
+            <div class="current_user"><small>{{ current_user.username }}</small></div>
+        </div>
 
 
         {% else %}
@@ -53,8 +60,7 @@
 
 
     <div class="content">
-        <div class="empty_block"></div>
-        <div class="empty_block"></div>
+
 <main role="main" class="#">
             <div class="row">
             <div class="col-md-12">
@@ -71,7 +77,6 @@
             {% endwith %}
 
             {% block content %}
-                        <div class="empty_block"></div>
                 {% endblock content %}
         </div>
         </div>

@@ -4,7 +4,7 @@
                         <div class="empty_block"></div>
                         <div class="empty_block"></div>
 
-<div class="login_form">
+<div class="login_form log_in">
     <form action="" method="POST">
 
         {{ form.hidden_tag() }}
@@ -12,7 +12,7 @@
 
             <div class="form-group">
                 {% if form.email.errors %}
-                {{ form.email(class='ё is-invalid', placeholder="Емайл") }}
+                {{ form.email(class='is-invalid', placeholder="Емайл") }}
                 <div class="invalid-feedback">
                     {% for errors in form.email.errors %}
                     <span>{{ error }}</span>
@@ -41,12 +41,21 @@
 
         </fieldset>
 
+
+
+
         <div class="form-group_button">
 
            <div class="btn"> {{ form.submit(class='btn_log_in') }}</div>
             <div class="border-top pt-2">
+
+
+                 <small class="text-muted ml-2">
+                <a href="{{ url_for('user.reset_request') }}">Забыли пароль?</a>
+          </small>
+
     <small class="text-muted">
-        Нужен аккаунт? <a class='ml-2' href="{{ url_for('user.register')}}">Зарегистрируйтесь!</a>
+        <a class='ml-2' href="{{ url_for('user.register')}}"> Нужен аккаунт?</a>
     </small>
 </div>
 
