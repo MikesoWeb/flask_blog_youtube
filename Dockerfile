@@ -1,16 +1,16 @@
-FROM python
+FROM python:3.9
+
 
 MAINTAINER Mike Terekhov 'mike_terekhov@gmail.com'
 
-RUN mkdir -p /usr/src/app/flask_blog_test/
-WORKDIR /usr/src/app/flask_blog_test/
+RUN mkdir -p /usr/src/app/flask_blog
+WORKDIR /usr/src/app/flask_blog
 
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
-RUN pip install --no-cache-dir -r requirements.txt
-
-ENV PORT 4200
-EXPOSE $PORT
+EXPOSE 8080
 
 
 CMD ["python", "run.py"]

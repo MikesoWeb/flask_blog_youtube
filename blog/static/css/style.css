@@ -197,7 +197,7 @@ ul .checkmark:before {
     margin-bottom: 20px;
 }
 
-
+input,
 input[placeholder]{
     padding-left: 10px;
     font-size: 16px;
